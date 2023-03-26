@@ -2,8 +2,6 @@
 
 Created for a group assignment.
 
-> Run with gcc Compiler and Makefile, with command `make conway`.
-
+> Run with gcc Compiler and Makefile, with command `make conway`. 
 > Erase Executable files with `make clean`.
-
 > Execute with `./conway`.
