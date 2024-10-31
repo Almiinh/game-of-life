@@ -1,31 +1,32 @@
-/* Author : Minh-Hoang HUYNH, David VAN OVERSCHEE, Zoé CHAUVEL
+/* Author : Minh-Hoang HUYNH
  * Date : 6/11/2022
  * Created on : 2/11/2022
- * Coders:  David       -> CODER 1 : Basics part
- *          Zoé         -> CODER 2 : Logics part
- *          Minh-Hoang  -> CODER 3 : Display part
  *
  * --------------------------------------------
  * Conway's Game of Life Program using ncurses
  * --------------------------------------------
  *
  * 
- * In this program we create a 2D array called "field" and each coordinates indicates the presence of a "cell".
+ * In this program we create a 2D array called "field" and each coordinates indicates the presence
+ * of a "cell".
  * 
- * We could use a user defined structure "cell",(with a status and coordinates) but here it is not absolutely necessary
- * as long as we pass i,j in each function.
+ * We could use a user defined structure "cell",(with a status and coordinates) but here it is not
+ * absolutely necessary as long as we pass i,j in each function.
  * 
- * We choose only to represent the field with Boolean arrays because it takes less memory than int arrays. 
- * (bool is 1 octet instead of 4 for int)
+ * We choose only to represent the field with Boolean arrays because it takes less memory than int
+ * arrays. (bool is 1 octet instead of 4 for int)
  * 
- * Each cell is going to be designated by only its coordinates (i,j) in a matrix-like notation andg the field will return its state:
+ * Each cell is going to be designated by only its coordinates (i,j) in a matrix-like notation and
+ * the field will return its state:
  *      field[i][j] will return either {Alive : true} or  {Dead : false}
  * --------------------------------------------------------------------------------------------------------------------------------
  */
 
 #include <stdio.h>          
 #include <stdlib.h>         /* for malloc */
-#include <stdbool.h>        /* Introduce boolean type: 'bool' based on C99 _Bool, values { true = 1 or anything else, false = 0}, size of bool is 1, whereas size of int is 4*/
+#include <stdbool.h>        /* Introduce boolean type: 'bool' based on C99 _Bool, 
+                            values { true = 1 or anything else, false = 0}, 
+                            size of bool is 1 whereas size of int is 4*/
 #include <ncurses.h>        /* ncurses library (need compiling option -lncurses)*/
 #include <unistd.h>         /* sleep function */
 #include <string.h>         /* strlen function*/
@@ -38,7 +39,6 @@ int main();
 
 
 
-// CODER 2 & 3
 int getAliveNeighborNumber(bool** array, int i, int j){ 
     // returns the number of alive neighbors by scanning the 8 neighbors
     // taking into account the extreme borders and returns the counter.    
@@ -73,7 +73,7 @@ int getAliveNeighborNumber(bool** array, int i, int j){
     return count;
 }
 
-//CODER 2
+
 bool updateCell(bool** field, int i, int j){    
     int neighborAlive = getAliveNeighborNumber(field, i, j);
     bool cellAlive = field[i][j];
@@ -84,7 +84,7 @@ bool updateCell(bool** field, int i, int j){
     return false;
 }
 
-// CODER 1
+
 //  Create a 2D array [i, j] (matrix notation) from 0..LINES-1 and 0..COLS-1 filled with 'false'
 bool** createArray(int y_size, int x_size){
     bool ** array = (bool **) malloc(y_size * sizeof(bool*));       // bool** = array of bool*
@@ -100,7 +100,6 @@ bool** createArray(int y_size, int x_size){
  * The start pattern are represented graphically by lists of 1 and 0 then transformed.
  */
 void initArray(bool** array){
-    // CODER 2 & 3
 
     // R-pentomino 
     int l1[5] = {0,0,0,0,0};
@@ -123,7 +122,7 @@ void initArray(bool** array){
     // int l4[9] = {0,1,1,0,0,1,1,1,0};
     // int l5[9] = {0,0,0,0,0,0,0,0,0};
 
-    /* CODER 3
+    /* 
      * This part transforms the lists into points
      * in order to display it at the center of the field
      */
@@ -140,8 +139,8 @@ void initArray(bool** array){
     }
 }
 
-int main(){
-    /* CODER 3 Create the display*/    
+int main(){   
+    /* Create display*/    
     initscr();              // initiate the window stdscr
     bool displayOn = true;  // state of the display
     curs_set(false);        // hide the default screen cursor.
@@ -152,10 +151,9 @@ int main(){
     initArray(field);
     int k=0;
 
-    // CODER 1
-    // main loop 
+    /* Main loop */
     while(displayOn){
-        clear();    //Clear window at each step
+        clear();    /* Clear window at each step */
         newField = createArray(LINES, COLS);
         
         for (int i = 1; i < LINES; i++){                    /* Update part */
@@ -167,7 +165,7 @@ int main(){
     	//swap
     	field = newField;
     	
-        /* CODER 3
+        /* 
          * Display based on the field. Scan field and print on the window
          * according to the state of each cell.
          */
@@ -181,7 +179,7 @@ int main(){
         }
 
         /* Displaying some messages */
-        mvprintw(LINES-1,0,"Minh-Hoang HUYNH, Zoé CHAUVEL, David VAN OVERSCHEE");
+        mvprintw(LINES-1,0,"Minh-Hoang HUYNH");
         mvprintw(0,0,"Conway's Game of Life");
         mvprintw(1,0,"Step %d",k);  /* Show the steps*/
         char* msg = "Press any key to stop";
