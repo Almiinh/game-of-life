@@ -1,5 +1,7 @@
 # Game of Life in C
 
+![Animation of the Game of Life](SHOWME.webp)
+
 Created for a group assignment.
 You can run this project with a Docker container or with gcc installed directly (only Mac & Linux)
 
